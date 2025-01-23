@@ -5,12 +5,34 @@ import random
 numLives = 10           # number of player's lives remaining
 mNumLives = 12          # number of monster's lives remaining
 
+# Define Functions
+def valid_input_int(message):
+    while True:
+        try:
+            return int(input(message))
+        except ValueError:
+            print('Please enter a number.')
 
 diceOptions = [1, 2, 3, 4, 5, 6]
-combatStrength = int(input("Enter your combat Strength: "))
-mCombatStrength = int(input("Enter the monster's combat Strength: "))
+combatStrength = valid_input_int("Enter your combat Strength: ")
+mCombatStrength = valid_input_int("Enter the monster's combat Strength: ")
 
 weapons = ["Fist", "Knife", "Club", "Gun", "Bomb", "Nuclear Bomb"]
+input("Roll the dice to see which weapon you get (Press enter)")
+weaponRoll = random.choice(diceOptions)
+combatStrength += weaponRoll # Add numeric (dice) value to combat strength
+weapon = weapons[weaponRoll - 1]
+print("You rolled the following weapon: " + weapon)
+
+if weaponRoll <= 2:
+    print("You rolled a weak weapon, friend.")
+elif weaponRoll <= 4:
+    print("Your weapon is meh.")
+else:
+    print("Nice weapon, friend!")
+
+if weapon != "Fist":
+    print("Thank goodness you didn't roll the fist!")
 
 input("Roll the dice for your health points (Press enter)")
 healthPoints = random.choice(diceOptions)
